@@ -1,0 +1,14 @@
+2023-09-05 11:33:28,798.basic_functions.INFO ==================================================
+2023-09-05 11:33:28,799.basic_functions.INFO Today is 2023-09-05 at 11:33 AM
+2023-09-05 11:33:28,829.basic_functions.INFO Running on: nt Windows 10
+2023-09-05 11:33:28,830.basic_functions.INFO Python version:  3.11.4
+2023-09-05 11:33:28,830.basic_functions.INFO Python path: C:\Users\ksu09\AppData\Local\Programs\Python\Python311
+2023-09-05 11:33:28,830.basic_functions.INFO Working dir: C:\Users\ksu09\Intro to Python\datafun-03-datatypes
+2023-09-05 11:33:28,831.basic_functions.INFO ==================================================
+2023-09-05 11:33:28,840.basic_functions.INFO Functions url = https://docs.python.org/3/library/functions.html
+2023-09-05 11:33:28,841.basic_functions.INFO number_list = [1, 2, 3, 4, 5]
+2023-09-05 11:33:28,841.basic_functions.INFO len(number_list) = 5
+2023-09-05 11:33:28,841.basic_functions.INFO min(number_list) = 1
+2023-09-05 11:33:28,841.basic_functions.INFO max(number_list) = 5
+2023-09-05 11:33:40,409.basic_functions.INFO message = Hello Tanner!
+2023-09-05 11:33:45,651.basic_functions.INFO response = y
