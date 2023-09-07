@@ -1,0 +1,21 @@
+2023-09-06 20:16:09,914 =============================================================
+2023-09-06 20:16:09,915 =============================================================
+2023-09-06 20:16:09,915 Today is 2023-09-06 at 08:16 PM
+2023-09-06 20:16:09,937 This file is running on: nt Windows 10
+2023-09-06 20:16:09,937 The Python version is: 3.11.4
+2023-09-06 20:16:09,937 The active conda environment is:  None
+2023-09-06 20:16:09,937 The active pip environment is:    None
+2023-09-06 20:16:09,937 The active environment path is:   C:\Users\ksu09\AppData\Local\Programs\Python\Python311
+2023-09-06 20:16:09,937 The current working directory is: C:\Users\ksu09\Intro to Python\datafun-03-datatypes
+2023-09-06 20:16:09,937 This source file is in:           c:\Users\ksu09\Intro to Python\datafun-03-datatypes
+2023-09-06 20:16:09,938 =============================================================
+2023-09-06 20:16:09,938 =============================================================
+2023-09-06 20:16:09,938 Calling functions from main block
+2023-09-06 20:16:09,938 Length:{length}
+2023-09-06 20:16:09,938 Combined tuples:{set_sort}
+2023-09-06 20:16:09,938 Combined tuples:{combined_tuples}
+2023-09-06 20:16:09,946 A {product_word} is really good with a {product_word}
+2023-09-06 20:16:09,946 The list of words is: ['One', 'fish', 'two', 'fish', 'red', 'fish', 'blue', 'fish.']
+2023-09-06 20:16:09,946 There are 8 words in the file.
+2023-09-06 20:16:09,946 The set of unique words is: {'red', 'blue', 'fish.', 'fish', 'One', 'two'}
+2023-09-06 20:16:09,946 There are 6 unique words in the file.

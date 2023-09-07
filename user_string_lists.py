@@ -1,12 +1,16 @@
 """
-Modify this docstring.
-
+Purpose: Illustrate string lists
 """
 
-# imports first
 import random
+
 from util_datafun_logger import setup_logger
+
+# Set up logging .............................................
+
 logger, logname = setup_logger(__file__)
+
+# Define shared data ..........................................
 
 product_categories = ["Electronics", "Clothing", "Home Appliances", "Furniture", "Sports Equipment"]
 sales_team_names = ["Team A", "Team B", "Team C", "Team D", "Team E"]
@@ -14,64 +18,61 @@ sales_performance_terms = ["Conversion Rate", "Revenue Growth", "Customer Acquis
 customer_segments = ["Retail", "B2B", "E-commerce", "Small Business", "Enterprise"]
 sales_strategies = ["Cold Calling", "Social Selling", "Inbound Marketing", "Upselling", "Cross-selling"]
 
-# reusable functions next
-length = len(product_categories)
 
-# Check the length of the lists
-length = len(product_categories)
+def built_ins():
+    length = len(product_categories)
+    logger.info("Length:{length}")
 
-# Use zip to combine the lists into tuples
-combined_tuples = list(zip(product_categories, sales_performance_terms, sales_team_names))
+    set_sort = set(product_categories)
+    logger.info("Combined tuples:{set_sort}")
 
-# Display the combined tuples
-for i, tpl in enumerate(combined_tuples):
-    print(f"Tuple {i + 1}: {tpl}")
+    # Use zip to combine the lists into tuples
+    combined_tuples = list(zip(product_categories, sales_performance_terms, sales_team_names))
+    logger.info("Combined tuples:{combined_tuples}")
 
-# Use set() to create a set of unique tuples
-unique_tuples = set(combined_tuples)
 
-# Display the unique tuples
-logger.info("\nUnique Tuples:")
-for i, tpl in enumerate(unique_tuples):
-    print(f"Unique Tuple {i + 1}: {tpl}")
+def random_choice():
+    random_product_category = random.choice(product_categories)
+    logger.info("Random Product Category:", random_product_category)
 
-# Generate a random sentence
-def generate_random_sentence():
-    category = random.choice(product_categories)
-    team_name = random.choice(sales_team_names)
-    performance_term = random.choice(sales_performance_terms)
-    segment = random.choice(customer_segments)
-    strategy = random.choice(sales_strategies)
+def generate_random_sent():
+    product_word = random.choice(product_categories)
+    logger.info("A {product_word} is really good with a {product_word}")
 
-    sentence = f"In the {category} category, {team_name} achieved impressive {performance_term} in the {segment} segment using {strategy}."
-    return sentence
+    
+    with open("text_simple.txt", "r") as fileObject:
+        text = fileObject.read()
+        list_words = text.split()  # split on whitespace
+        unique_words = set(list_words)  # remove duplicates by making a set
 
-# Generate and print random sentences
-for _ in range(5):  # Generate 5 random sentences
-    random_sentence = generate_random_sentence()
-    print(random_sentence)
+        # Get the count and list of words
+        word_ct = len(list_words)
 
-# Open and read the text file
-with open("text_simple.txt", "r") as file:
-    text = file.read()
+        logger.info(f"The list of words is: {list_words}")
+        logger.info(f"There are {word_ct} words in the file.")
 
-# Split the text into words and convert them to lowercase
-words = text.lower().split()
+        # Print the count and list of unique words
+        unique_word_ct = len(unique_words)
 
-# Use set to get unique words
-unique_words = set(words)
+        logger.info(f"The set of unique words is: {unique_words}")
+        logger.info(f"There are {unique_word_ct} unique words in the file.")
 
-# Sort the list of unique words
-sorted_unique_words = sorted(unique_words)
 
-# Get the length of the list
-word_count = len(sorted_unique_words)
+def show_log():
+    """Read log file and print it to the terminal"""
+    with open(logname, "r") as file_wrapper:
+        print(file_wrapper.read())
 
-# Display the length and the sorted list of unique words
-print(f"Number of unique words: {word_count}")
-print("Sorted list of unique words:")
-for word in sorted_unique_words:
-    print(word)
 
-# call functions and execute code
-# use if __name__ == "__main__":
+# -------------------------------------------------------------
+# Call some functions and execute code!
+# Remember, code blocks must be indented consistently after a colon.
+
+if __name__ == "__main__":
+    logger.info("Calling functions from main block")
+
+    built_ins()
+    random_choice()
+    generate_random_sent()
+
+    show_log()
