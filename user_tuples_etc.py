@@ -1,7 +1,14 @@
 """
-Modify this docstring.
+Purpose: Illustrate tuples, sets, and dictionaries in Python.
 
-""" 
+Tuples, sets, and dictionaries are all iterable objects. 
+That means that they can be used in a for loop.
+And with filter() and map() functions (better!)
+And with comprehension syntax (the best!)
+
+"""
+
+# import from local util_datafun_logger.py
 from util_datafun_logger import setup_logger
 
 # Call the setup_logger function to create a logger and get the log file name
@@ -11,43 +18,232 @@ sales_rep_info = ("John Doe", 35, "Team A", "Senior Sales Rep")
 customer_info = ("Company XYZ", "Retail", "New York", "contact@companyxyz.com")
 product_info = ("Product A", "Electronics", "High-end smartphone", 599.99)
 
-# Create two sets
-set1 = {1, 2, 3, 4, 5}
-set2 = {3, 4, 5, 6, 7}
+def illustrate_tuples():
+    """This function illustrates tuples in Python."""
+   
 
-# Get the intersection of the sets
-intersection = set1.intersection(set2)
+    # Create some tuples
+    set1 = (1, 2, 3, 4, 5)
+    set2 = (3, 4, 5, 6, 7)
 
-# Get the union of the sets
-union = set1.union(set2)
+    logger.info(f"set1 = {set1}")
+    logger.info(f"set2 = {set2}")
 
-print("Set 1:", set1)
-print("Set 2:", set2)
-print("Intersection of Set 1 and Set 2:", intersection)
-print("Union of Set 1 and Set 2:", union)
+    # tuple concatenation
+    tupleCat = set1 + set2
+
+    # tuple repetition
+    tupleAThrice = set1 * 3
+
+    # TODO: Start using this f-string "syntactic sugar" for quick ouptut
+    # just add space = space inside the curly braces
+    # it will print the name of the variable and the value
+    logger.info(f"{set1 = }")
+    logger.info(f"{set2 = }")
+    logger.info(f"{tupleCat = }")
+    logger.info(f"{tupleAThrice = }")
+
+    # tuple membership testing
+
+    tupleD = (1, 2, 3)
+    hasOne = 1 in tupleD  # True
+    hasFour = 4 in tupleD  # False
+
+    # tuple indexing (0 is first, -1 is last, or 1 less than the length)
+
+    my_tuple = (1, 2, 3)
+    first = my_tuple[0]
+    second = my_tuple[1]
+    third = my_tuple[2]
+    last = my_tuple[-1]
+
+    # Use tuples to return multiple values from a function
+
+    def divide_and_remainder(dividend, divisor):
+        quotient = dividend // divisor
+        remainder = dividend % divisor
+        return quotient, remainder
+
+    q, r = divide_and_remainder(10, 3)
+    logger.info(f"Quotient: {q}, Remainder: {r}")
 
 
-# Initialize an empty dictionary to store word counts
-word_count_dict = {}
+def illustrate_sets():
+    """This function illustrates sets in Python."""
 
-# Open and read the text file
-with open("text_simple.txt", "r") as file:
-    text = file.read()
+    """
+    SETS .......................................................    
 
-# Split the text into words
-words = text.split()
+    A set is an unordered collection of unique elements.
+    A set is created using curly braces.
+    Sets can use the same methods as lists and tuples.
+    Sets support the following operations:
 
-# Iterate through the words and count them
-for word in words:
-    # Remove punctuation and convert to lowercase for consistency
-    word = word.strip('.,!?"\'').lower()
-    
-    # Update the word count in the dictionary
-    if word in word_count_dict:
-        word_count_dict[word] += 1
-    else:
-        word_count_dict[word] = 1
+    Membership testing (using the in and not in operators)
+    Element addition (using the add method)
+    Element removal (using the remove and discard methods)
+    Set union (using the union method or the | operator)
+    Set intersection (using the intersection method or the & operator)
+    Set difference (using the difference method or the - operator)
+    Set symmetric difference (using the symmetric_difference method or ^ operator)
 
-# Display the word count dictionary
-for word, count in word_count_dict.items():
-    print(f"\n{word}: {count}")
+
+    """
+
+    setA = {1, 2, 3, 4, 5}
+    setB = {3, 4, 5, 6, 7}
+
+    logger.info(f"setA = {setA}")
+    logger.info(f"setB = {setB}")
+
+    # set union
+    setC = setA | setB
+
+    # set intersection
+    setD = setA & setB
+
+    # set difference
+    setE = setA - setB
+
+    # sets are often used to remove duplicates from a list
+    # after gettin the set, convert it back to a list with list() or []
+    customer_info = ("Company XYZ", "Retail", "New York", "contact@companyxyz.com")
+    setWords = set(customer_info)
+    listWordsNoDuplicates = list(setWords)
+    listWordsNoDuplicates = [setWords]  # same as above
+
+
+def illustrate_dictionaries():
+    """This function illustrates dictionaries in Python."""
+
+    """
+    DICTIONARIES .......................................................    
+
+    A dictionary is an unordered collection of key-value pairs.
+    A dictionary is created using curly braces.
+    A dictionary is accessed using keys, not indexes.
+    A dictionary is mutable, so you can add, remove, and change values.
+    A dictionary is iterable, so you can use it in a for loop.
+    A dictionary is not ordered, so you can't slice to access a range of values.
+
+    Dictionaries support the following operations:
+
+    Indexing: access the value associated with a key in the dictionary. 
+    For example: dogA['name'].
+
+    Membership testing: use 'in' and 'not in' operators 
+    to test whether a key is in the dictionary. 
+    For example: 'name' in dogA.
+
+    Adding and updating items: use indexing to add a new key-value pair,
+    or to update the value associated with an existing key. 
+    For example: dogA['age'] = 2.
+
+    Removing items: Use the del statement to remove a key-value pair. 
+    For example: del dogA['weight_kg'].
+
+    Iteration: You can use a for loop to iterate over the 
+    keys, values, or key-value pairs in a dictionary. 
+    For example: for key in dogA: print(key)
+
+    Dictionaries are a lot like 
+    JSON objects - a common data format used in web development.
+
+    """
+
+    dogA_dict = {"name": "Rex", "age": 2, "weight_kg": 13.4}
+    dogB_dict = {"name": "Fido", "age": 3, "weight_kg": 15.2}
+
+    logger.info(f"dogA_dict = {dogA_dict}")
+    logger.info(f"dogB_dict = {dogB_dict}")
+
+    assessment_dict = {"low": 0, "medium": 1, "high": 2}
+    logger.info(f"assessment_dict = {assessment_dict}")
+
+    data_dict = {
+        "name": ["Alice", "Bob", "Charlie", "David"],
+        "age": [25, 30, 35, 40],
+        "income": [50000, 60000, 70000, 80000],
+    }
+    logger.info(f"data_dict = {data_dict}")
+
+    # In data anlytics, dictionaries may be used to store and manipulate
+    # tabular data, e.g. from database records or Excel rows.
+
+    # Dictionaries can be used to store and aggregate statistical data,
+    # such as counts or sums. For example, a dictionary of word-count pairs.
+
+    with open("text_simple.txt") as file_object:
+        word_list = file_object.read().split()
+
+    word_counts_dict = {}
+    for word in word_list:
+        if word in word_counts_dict:
+            word_counts_dict[word] += 1
+        else:
+            word_counts_dict[word] = 1
+
+    logger.info("Word count is a good way to begin processing text.")
+    logger.info(f"Given text_simple.txt, the word_counts_dict = {word_counts_dict}")
+
+    # Initialize an empty dictionary to store word counts
+    word_count = {}
+
+    # Open the file for reading
+    with open('text_simple.txt', 'r') as file:
+    # Read the file line by line
+        for line in file:
+        # Split each line into words
+            words = line.split()
+        
+       
+        for word in words:            
+            word = word.strip('.,!?').lower()
+            
+            if word in word_count:
+                word_count[word] += 1
+            else:
+                word_count[word] = 1
+
+    # Print the word counts
+            for word, count in word_count.items():
+                logger.info("{word}: {count}")
+
+
+    # IMPORTANT: Dictionary comprehesions - the preferred approach
+
+    # Create a dictionary of word counts from a list of words
+    # A dictionary is always key:value pairs
+    # Say "I want word:count for each word in word_list"
+    # Cast the result to a dictionary by using curly braces {}
+    word_counts_dict2 = {word: word_list.count(word) for word in word_list}
+
+    # Spend most of your practice on comprehensions - they are
+    # key to transforming data in Python.
+
+    logger.info("Given text_simple.txt and comprehensions,")
+    logger.info(f"the the word_counts_dict2 = {word_counts_dict2}")
+
+
+def show_log():
+    """Read log file and print it to the terminal"""
+    with open(logname, "r") as file_wrapper:
+        print(file_wrapper.read())
+
+
+# -------------------------------------------------------------
+# Call some functions and execute code!
+# Remember, code blocks must be indented consistently after a colon.
+
+if __name__ == "__main__":
+    logger.info("Calling functions from main block")
+
+    # call your functions here
+    illustrate_tuples()
+    illustrate_sets()
+    illustrate_dictionaries()
+
+    logger.info("Add more logging statements to the code to see what happens.")
+    logger.info("Explore enough to understand.")
+    logger.info("Apply these skills to your own topic domain.")
+    show_log()
