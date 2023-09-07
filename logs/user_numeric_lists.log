@@ -1,23 +1,47 @@
-2023-09-05 16:14:55,760 =============================================================
-2023-09-05 16:14:55,760 =============================================================
-2023-09-05 16:14:55,760 Today is 2023-09-05 at 04:14 PM
-2023-09-05 16:14:55,782 This file is running on: nt Windows 10
-2023-09-05 16:14:55,782 The Python version is: 3.11.4
-2023-09-05 16:14:55,782 The active conda environment is:  None
-2023-09-05 16:14:55,782 The active pip environment is:    None
-2023-09-05 16:14:55,782 The active environment path is:   C:\Users\ksu09\AppData\Local\Programs\Python\Python311
-2023-09-05 16:14:55,782 The current working directory is: C:\Users\ksu09\Intro to Python\datafun-03-datatypes
-2023-09-05 16:14:55,782 This source file is in:           c:\Users\ksu09\Intro to Python\datafun-03-datatypes
-2023-09-05 16:14:55,783 =============================================================
-2023-09-05 16:14:55,783 =============================================================
-2023-09-05 16:14:55,783 For list1:
-2023-09-05 16:14:55,783 Standard Deviation: 52.690854556043725
-2023-09-05 16:14:55,783 Variance: 2776.326153846154
-2023-09-05 16:14:55,783 
-For listx:
-2023-09-05 16:14:55,783 Standard Deviation: 3.0276503540974917
-2023-09-05 16:14:55,783 Variance: 9.166666666666666
-2023-09-05 16:14:55,783 
-For listy:
-2023-09-05 16:14:55,783 Standard Deviation: 308.5248234205259
-2023-09-05 16:14:55,783 Variance: 95187.56666666667
+2023-09-06 19:50:22,630 =============================================================
+2023-09-06 19:50:22,631 =============================================================
+2023-09-06 19:50:22,631 Today is 2023-09-06 at 07:50 PM
+2023-09-06 19:50:22,653 This file is running on: nt Windows 10
+2023-09-06 19:50:22,653 The Python version is: 3.11.4
+2023-09-06 19:50:22,653 The active conda environment is:  None
+2023-09-06 19:50:22,653 The active pip environment is:    None
+2023-09-06 19:50:22,653 The active environment path is:   C:\Users\ksu09\AppData\Local\Programs\Python\Python311
+2023-09-06 19:50:22,653 The current working directory is: C:\Users\ksu09\Intro to Python\datafun-03-datatypes
+2023-09-06 19:50:22,653 This source file is in:           c:\Users\ksu09\Intro to Python\datafun-03-datatypes
+2023-09-06 19:50:22,653 =============================================================
+2023-09-06 19:50:22,653 =============================================================
+2023-09-06 19:50:22,653 Calling functions from main block
+2023-09-06 19:50:22,653 list1: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 50, 51, 52, 53, 54, 98, 88, 101, 121, 151, 201, 55]
+2023-09-06 19:50:22,654 mean: 45.38461538461539
+2023-09-06 19:50:22,655 median: 13.5
+2023-09-06 19:50:22,655 mode: 1
+2023-09-06 19:50:22,655 stdev: 52.690854556043725
+2023-09-06 19:50:22,655 variance: 2776.326153846154
+2023-09-06 19:50:22,655 xtimes_list: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+2023-09-06 19:50:22,655 yvalues_list: [100, 200, 301, 402, 500, 605, 702, 811, 915, 1017]
+2023-09-06 19:50:22,655 correlation between x and y: 0.9999467561933848
+2023-09-06 19:50:22,655 The equation of the best fit line is: y = 101.89696969696969x + 96.76363636363635
+2023-09-06 19:50:22,655 We predict that when x = {newx}, y will be about {newy}
+2023-09-06 19:50:22,655 Given score list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 50, 51, 52, 53, 54, 98, 88, 101, 121, 151, 201, 55]
+2023-09-06 19:50:22,655 The max() is 201
+2023-09-06 19:50:22,655 The min() is 1
+2023-09-06 19:50:22,655 The len() is 26
+2023-09-06 19:50:22,655 The sum() is 1180
+2023-09-06 19:50:22,655 The average is 45.38461538461539
+2023-09-06 19:50:22,655 Given score list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 50, 51, 52, 53, 54, 98, 88, 101, 121, 151, 201, 55]
+2023-09-06 19:50:22,655 Using the built-it function sorted(lst) gives: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 50, 51, 52, 53, 54, 55, 88, 98, 101, 121, 151, 201]
+2023-09-06 19:50:22,655 Using the built-in function sorted(lst,reverse=True) gives: [201, 151, 121, 101, 98, 88, 55, 54, 53, 52, 51, 50, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+2023-09-06 19:50:22,656 new_scores is: [201, 151, 121, 101, 98, 88, 55, 54, 53, 52, 51, 50, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+2023-09-06 19:50:22,656 Popped the first (index=0): 201 and now, new_scores is: [151, 121, 101, 98, 88, 55, 54, 53, 52, 51, 50, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+2023-09-06 19:50:22,656 Popped the last (index=-1): 1 and now, new_scores is: [151, 121, 101, 98, 88, 55, 54, 53, 52, 51, 50, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2]
+2023-09-06 19:50:22,656 Score list: {list1}
+2023-09-06 19:50:22,656 Scores over 100: [<filter object at 0x00000288E56DAF20>]
+2023-09-06 19:50:22,656 Cube roots: [<map object at 0x00000288E5706170>]
+2023-09-06 19:50:22,656 Square root of scores: <map object at 0x00000288E5705F30>
+2023-09-06 19:50:22,656 Score list: {list1}
+2023-09-06 19:50:22,656 Scores under 6 (using list comprehensions!): {scores_under_6}
+2023-09-06 19:50:22,656 Tripled scores (using list comprehensions!): {triple_scores}
+2023-09-06 19:50:22,656 Exponential scores (using list comprehensions!): {exponential_value}
+2023-09-06 19:50:22,656 Add more logging statements to the code to see what happens.
+2023-09-06 19:50:22,656 Explore enough to understand.
+2023-09-06 19:50:22,656 Apply these skills to your own topic domain.

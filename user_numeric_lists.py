@@ -1,314 +1,267 @@
-# Import some helpful modules from the Python Standard Library
-import logging
-import pathlib
-import platform
-import sys
-import os
-import datetime
-import util_datafun_logger
-import util_logger
-"""
-Modify this docstring.
 
-"""
-
-# import some standard modules first - how many can you make use of?
-import math
+# import from standard library
 import statistics
+import math
 
-# TODO: import from local util_datafun_logger.py 
+# import from local files
 from util_datafun_logger import setup_logger
-# TODO: Call the setup_logger function to create a logger and get the log file name
+
+# Set up logging .............................................
+
+# Call the setup_logger function
 logger, logname = setup_logger(__file__)
 
-# TODO: Create some shared data lists if you like - or just create them in your functions
+# Define shared data ..........................................
+
+# define a variable with some univariant data
+# (one varabile, many readings)
 list1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 50, 51, 52, 53, 54, 98, 88, 101, 121, 151, 201, 55]
-listx = list(range(10))
-listy = [100, 200, 301, 402, 500, 605, 702, 811, 915, 1017]
 
-# Calculate mean, median, and mode for list1
-mean_list1 = sum(list1) / len(list1)
-median_list1 = statistics.median(list1)
-mode_list1 = statistics.mode(list1)
+# univariant time series data (one varabile over time)
+# typically, x (or time) is independent and
+# y is dependent on x (e.g. temperature vs hour of day)
+xtimes_list = list(range(10))
+yvalues_list = [100, 200, 301, 402, 500, 605, 702, 811, 915, 1017]
 
-# Calculate mean, median, and mode for listx
-mean_listx = sum(listx) / len(listx)
-median_listx = statistics.median(listx)
-# Mode cannot be calculated for listx as it contains unique values
+# Define functions ........................................
 
-# Calculate mean, median, and mode for listy
-mean_listy = sum(listy) / len(listy)
-median_listy = statistics.median(listy)
-# Mode cannot be calculated for listx as it contains unique values
 
-# Display the results
-logger.info(f"For list1:")
-logger.info(f"Mean: {mean_list1}")
-logger.info(f"Median: {median_list1}")
-logger.info(f"Mode: {mode_list1}")
+def illustrate_list_statistics():
+    """This function illustrates descriptive statistics for a numric list."""
 
-logger.info(f"\nFor listx:")
-logger.info(f"Mean: {mean_listx}")
-logger.info(f"Median: {median_listx}")
+    logger.info(f"list1: {list1}")
 
-logger.info("\nFor listy:")
-logger.info(f"Mean: {mean_listy}")
-logger.info(f"Median: {median_listy}")
+    # Descriptive: Averages and measures of central tendency
+    # Use statisttics module to get mean, median, mode
+    # for a values list
 
-# Calculate standard deviation and variance for list1
-std_deviation_list1 = statistics.stdev(list1)
-variance_list1 = statistics.variance(list1)
+    mean = statistics.mean(list1)
+    median = statistics.median(list1)
+    mode = statistics.mode(list1)
 
-# Calculate standard deviation and variance for listx
-std_deviation_listx = statistics.stdev(listx)
-variance_listx = statistics.variance(listx)
+    logger.info(f"mean: {mean}")
+    logger.info(f"median: {median}")
+    logger.info(f"mode: {mode}")
 
-# Calculate standard deviation and variance for listy
-std_deviation_listy = statistics.stdev(listy)
-variance_listy = statistics.variance(listy)
+    stdev = statistics.stdev(list1)
+    variance = statistics.variance(list1)
 
-# Display the results
-logger.info(f"For list1:")
-logger.info(f"Standard Deviation: {std_deviation_list1}")
-logger.info(f"Variance: {variance_list1}")
+    logger.info(f"stdev: {stdev}")
+    logger.info(f"variance: {variance}")
 
-logger.info("\nFor listx:")
-logger.info(f"Standard Deviation: {std_deviation_listx}")
-logger.info(f"Variance: {variance_listx}")
 
-logger.info("\nFor listy:")
-logger.info(f"Standard Deviation: {std_deviation_listy}")
-logger.info(f"Variance: {variance_listy}")
+def illustrate_list_correlation_and_prediction():
+    """This function illustrates correlation and prediction for a numric list."""
 
-# Calculate the numerator and denominators for the correlation formula
-numerator = sum((x - mean_listx) * (y - mean_listy) for x, y in zip(listx, listy))
-denominator_x = sum((x - mean_listx) ** 2 for x in listx)
-denominator_y = sum((y - mean_listy) ** 2 for y in listy)
+    logger.info(f"xtimes_list: {xtimes_list}")
+    logger.info(f"yvalues_list: {yvalues_list}")
 
-# Calculate the correlation coefficient
-correlation = numerator / (denominator_x ** 0.5 * denominator_y ** 0.5)
+    # Descriptive: Measures of correlation
+    # Use two numerical lists of the same size
+    # Use statisttics module to get correlation between list1 and list2
 
-# Display the correlation coefficient
-logger.info(f"Correlation between listx and listy: {correlation}")
+    correlationxy = statistics.correlation(xtimes_list, yvalues_list)
+    logger.info(f"correlation between x and y: {correlationxy}")
 
-slope= 2.9
-intercept = 15
+    # Predictive: Machine Learning - Linear Regression
+    # If the corrlation is close to 1.0, then the data is linearly related
+    # If so, use statistics module to get linear regression for list1 and list2
+    # This is a form of supervised machine learning - it uses all known data
+    # Use the slope and intercept and an unknown (future) x to predict a y value
+    # Python functions can return multiple values
 
-# Future time for prediction
-future_time = 15
+    slope, intercept = statistics.linear_regression(xtimes_list, yvalues_list)
+    logger.info(f"The equation of the best fit line is: y = {slope}x + {intercept}")
 
-# Predict the y-value at the future time using the linear equation y = mx + b
-predicted_y = slope * future_time + intercept
+    # Once we have learned the slope and intercept
+    # of the best-fit straight line through the data,
+    # we can use it to make predictions
 
-# Display the predicted y-value
-logger.info(f"Predicted y-value at future time {future_time}: {predicted_y}")
+    # Predict the y value for a given x value outside the range of the data
 
-logger.info(f"\nThe following values are for list 1")
-# Find the minimum value in list1
-minimum_value1 = min(list1)
-logger.info(f"Minimum value: {minimum_value1}")
+    x_max = max(xtimes_list)
+    newx = x_max * 15  # predict for a future x value
 
-# Find the maximum value in list1
-maximum_value1 = max(list1)
+    # Use the slope and intercept to predict a y value for the future x value
+    # y = mx + b
 
-logger.info(f"Maximum value: {maximum_value1}")
+    newy = slope * newx + intercept
 
-# Find the length (number of elements) of list1
-length_of_list1 = len(list1)
+    logger.info("We predict that when x = {newx}, y will be about {newy}")
 
-logger.info(f"Length of the list: {length_of_list1}")
 
-# Calculate the sum of all values in list1
-sum_of_values1 = sum(list1)
+def illustrate_list_built_in_functions():
+    # BUILT-IN FUNCTIONS ......................................
+    # Many built-in functions work on lists
+    # try min(), max(), len(), sum(), sorted(), reversed()
 
-logger.info(f"Sum of values: {sum_of_values1}")
+    # Using the score list provided above, do the following:
+    # Calcuate the max and min scores
+    max_value = max(list1)
+    min_value = min(list1)
 
-# Calculate the average of the values
-mean1 = sum_of_values1 / length_of_list1
-logger.info(f"Average (Mean): {mean1}")
+    logger.info(f"Given score list: {list1}")
+    logger.info(f"The max() is {max_value}")
+    logger.info(f"The min() is {min_value}")
 
-# Create a set from the list (removing duplicates)
-unique_values_set1 = set(list1)
+    # Calculate the length of the list
+    len_list = len(list1)
+    logger.info(f"The len() is {len_list}")
 
-logger.info(f"Set of unique values: {unique_values_set1}")
+    # Calculate the sum of the list
+    sum_list = sum(list1)
+    logger.info(f"The sum() is {sum_list}")
 
-# Sort list1 in ascending order
-sorted_list1 = sorted(list1)
+    # Calculate the average of the list
+    avg_list = sum_list / len_list
+    logger.info(f"The average is {avg_list}")
 
-logger.info(f"Sorted list (ascending): {sorted_list1}")
+    logger.info(f"Given score list: {list1}")
+    # Return a new list soreted in ascending order
+    asc_scores = sorted(list1)
+    logger.info(f"Using the built-it function sorted(lst) gives: {asc_scores}")
 
-# Sort list1 in descending order
-reverse_sorted_list1 = sorted(list1, reverse=True)
-logger.info(f"Sorted list (descending): {reverse_sorted_list1}")
+    # Return a new list soreted in descending order
+    desc_scores = sorted(list1, reverse=True)
+    logger.info(
+        f"Using the built-in function sorted(lst,reverse=True) gives: {desc_scores}"
+    )
+
 
-logger.info(f"\nThe following values are for list x")
-# Find the minimum value in listx
-minimum_valuex = min(listx)
-logger.info(f"Minimum value: {minimum_valuex}")
+def illustrate_list_methods():
+    """This function illustrates methods that can be called on a list"""
+
+    """
 
-# Find the maximum value in listx
-maximum_valuex = max(listx)
+     LIST METHODS ............................................... 
 
-logger.info(f"Maximum value: {maximum_valuex}")
+     Here are some common methods that operate on an instance of a list.
 
-# Find the length (number of elements) of listx
-length_of_listx = len(listx)
+     append(x): Add an item to the end of the list.
+     extend(iterable): Add all the items from an iterable (such as another list)
+          to the end of the list.
+     insert(i, x): Insert an item at a given position.
+     remove(x): Remove the first occurrence of an item.
+     pop([i]): Remove the item at the given position in the list, 
+     and return it. If no index is specified, 
+     removes and returns the last item in the list.
+     clear(): Remove all items from the list.
+     index(x[, start[, end]]): Return the index of the first occurrence of
+          an item.
+     count(x): Return the number of occurrences of an item.
+     sort(key=None, reverse=False): Sort the items in the list 
+          in ascending order.
+     reverse(): Reverse the order of the items in the list.
+     copy(): Return a shallow copy of the list.
 
-logger.info(f"Length of the list: {length_of_listx}")
+     """
 
-# Calculate the sum of all values in listx
-sum_of_valuesx = sum(listx)
+    # append an item to the end of the list
+    lst = [3, 6, 1, 8, 2, 5]
+    lst.append(7)
 
-logger.info(f"Sum of values: {sum_of_valuesx}")
+    # extend the list with another list
+    lst.extend([9, 10, 11])
 
-# Calculate the average of the values
-meanx = sum_of_valuesx / length_of_listx
-logger.info(f"Average (Mean): {meanx}")
+    # insert an item at a given position (0 = first item)
+    i = 2
+    newvalue = 4
+    lst.insert(i, newvalue)
 
-# Create a set from the listx (removing duplicates)
-unique_values_setx = set(listx)
+    # remove an item
+    item_to_remove = 5
+    lst.remove(item_to_remove)
 
-logger.info(f"Set of unique values: {unique_values_setx}")
+    # Count how many times 2 appears in the list
+    ct_of_111 = list1.count(2)
 
-# Sort listx in ascending order
-sorted_listx = sorted(listx)
+    # Sort the list in ascending order using the sort() method
+    asc_scores2 = list1.sort()
 
-logger.info(f"Sorted list (ascending): {sorted_listx}")
+    # Sort the list in descending order using the sort() method
+    desc_scores2 = list1.sort(reverse=True)
 
-# Sort listx in descending order
-reverse_sorted_listx = sorted(listx, reverse=True)
-logger.info(f"Sorted list (descending): {reverse_sorted_listx}")
+    # Copy the list to a new list
+    new_scores = list1.copy()
+    logger.info(f"new_scores is: {new_scores}")
 
-logger.info(f"\nThe following values are for list y")
-# Find the minimum value in listy
-minimum_valuey = min(listy)
-logger.info(f"Minimum value: {minimum_valuey}")
+    # Remove the first item from the new list
+    # The first item in a list is at index 0
+    # Think of it as an offset from the beginning of the list
+    first = new_scores.pop(0)
+    logger.info(
+        f"Popped the first (index=0): {first} and now, new_scores is: {new_scores}"
+    )
 
-# Find the maximum value in listy
-maximum_valuey = max(listy)
+    # Remove the last item from the new list
+    # The last item in a list is at index -1
+    last = new_scores.pop(-1)
+    logger.info(
+        f"Popped the last (index=-1): {last} and now, new_scores is: {new_scores}"
+    )
 
-logger.info(f"Maximum value: {maximum_valuey}")
 
-# Find the length (number of elements) of listy
-length_of_listy = len(listy)
 
-logger.info(f"Length of the list: {length_of_listy}")
+def illustrate_list_transformations():
+    """This function illustrates transformations that can be applied to a list"""
 
-# Calculate the sum of all values in listy
-sum_of_valuesy = sum(listy)
+    logger.info("Score list: {list1}")
 
-logger.info(f"Sum of values: {sum_of_valuesy}")
+    # TRANFORMATIONS ............................
 
-# Calculate the average of the values
-meany = sum_of_valuesy / length_of_listy
-logger.info(f"Average (Mean): {meany}")
+    # FILTER and MAP are critical tranformations in big data applications
 
-# Create a set from the listy (removing duplicates)
-unique_values_sety = set(listy)
+    # Use the built-in function filter() anywhere you need to filter a list
+    # Filter the new list to only include scores greater than 100
+    # You could pass in a named function, but honestly this is easier
+    # Say "KEEP x such that x > 100 is True" given list1
+    # Cast the result using square brackets to get back a list
+    scores_over_4 = [filter(lambda x: x < 4, list1)]
+    logger.info(f"Scores over 100: {scores_over_4}")
 
-logger.info(f"Set of unique values: {unique_values_sety}")
+    # Use the built-in function map() anywhere you need to transform a list
 
-# Sort listy in ascending order
-sorted_listy = sorted(listy)
+    # Map each element to its square
+    # Say "map x to x squared" given list1
+    # Cast the result using square brackets to get a list
+    cube_roots = [map(lambda x: x ** (1/3), list1)]
+    logger.info(f"Cube roots: {cube_roots}")
 
-logger.info(f"Sorted list (ascending): {sorted_listy}")
+   #volume
+    volume = map(lambda x: x** 3, list1)
+    logger.info(f"Square root of scores: {volume}")
 
-# Sort listx in descending order
-reverse_sorted_listy = sorted(listy, reverse=True)
-logger.info(f"Sorted list (descending): {reverse_sorted_listy}")
 
-# Create a new list named 'lst'
-lst = [3, 6, 1, 8, 2, 5]
+def illustrate_list_comprehensions():
+    """This function illustrates list comprehensions"""
 
-# Append a single value to the list
-lst.append(7)
-logger.info("\nAfter appending 7:", lst)
+    logger.info("Score list: {list1}")
 
-# Extend the list with a new list
-lst.extend([9, 10])
-logger.info("After extending with [9, 10]:", lst)
+    # TRANFORMATIONS - Using List Comprehensions
+    # List comprehensions are a concise way to create lists
+    # They work like map and filter, but are more concise
+    # They are the preferred "pythonic" way to do transformations
+    # They are faster than map / filter - it's quite impressive when you master them!
 
-# Insert a value at an index
-lst.insert(2, 4)
-logger.info("After inserting 4 at index 2:", lst)
+    scores_under_6 = [x for x in list1 if x < 6]
+    logger.info("Scores under 6 (using list comprehensions!): {scores_under_6}")
 
-# Remove the number 5 from the list, if found
-if 5 in lst:
-    lst.remove(5)
-logger.info("After removing 5 (if found):", lst)
+    triple_scores = [x * 3 for x in list1]
+    logger.info("Tripled scores (using list comprehensions!): {triple_scores}")
 
-# Count how many times 2 appears in the list
-count_2 = lst.count(2)
-logger.info("Count of 2 in the list:", count_2)
+    exponential_value = [math.exp(x) for x in list1]
+    logger.info("Exponential scores (using list comprehensions!): {exponential_value}")
 
-# Sort the list in ascending order
-lst.sort()
-logger.info("Sorted list (ascending):", lst)
 
-# Sort the list in descending order
-lst.sort(reverse=True)
-logger.info("Sorted list (descending):", lst)
 
-# Create a copy of the list
-lst_copy = lst.copy()
-logger.info("Copy of the list:", lst_copy)
 
-# Pop the first item off the top of the list (index 0)
-first_item = lst.pop(0)
-logger.info(f"Popped first item ({first_item}) from the list:", lst)
 
-# Pop the last item off the bottom of the list
-last_item = lst.pop()
-logger.info(f"Popped last item ({last_item}) from the list:", lst)
 
 
-# Use filter() to keep values less than 4
-filtered_values = filter(lambda x: x < 4, lst)
-
-# Use map() to calculate the cube root of each value
-cube_roots = map(lambda x: x ** (1/3), lst)
-
-# Use map() to calculate the volume of a cube with a side equal to each value
-cube_volumes = map(lambda x: x ** 3, lst)
-
-# Convert the results to lists for logger.infoing
-filtered_values_list = list(filtered_values)
-cube_roots_list = list(cube_roots)
-cube_volumes_list = list(cube_volumes)
-
-# logger.info the results
-logger.info("\nValues less than 4:", filtered_values_list)
-logger.info("Cube roots:", cube_roots_list)
-logger.info("Volumes of cubes:", cube_volumes_list)
-
-
-# Use a list comprehension to filter values less than 6
-filtered_values = [x for x in list1 if x < 6]
-
-# Use a list comprehension to triple each value
-tripled_values = [x * 3 for x in list1]
-
-# Use a list comprehension to transform the list using a custom transformation (e.g., squaring)
-transformed_values = [x ** 2 for x in list1]
-
-# logger.info the results
-logger.info("\nValues less than 6:", filtered_values)
-logger.info("Triple of each value:", tripled_values)
-logger.info("Squared values:", transformed_values)
-
-
-# TODO: define some custom functions
-
-def custom_function_1(param1, param2):
-    result = param1 * param2
-    logger.info("Custom Function 1 executed with params: {} and {}. Result: {}".format(param1, param2, result))
-    return result
-
-def custom_function_2(data_list):
-    processed_data = [item.upper() for item in data_list]
-    logger.info("Custom Function 2 processed data: {}".format(processed_data))
-    return processed_data
-
+def show_log():
+    """Read log file and print it to the terminal"""
+    with open(logname, "r") as file_wrapper:
+        print(file_wrapper.read())
 
 
 # -------------------------------------------------------------
@@ -317,8 +270,35 @@ def custom_function_2(data_list):
 # This is very standard Python - it means
 # "If this module is the one being executed, i.e., the main module"
 # (as opposed to being imported by another module)
-# Literally: "if this module name == the name of the main module"
+if __name__ == "__main__":
+    logger.info("Calling functions from main block")
+
+    # call your functions here (see instructions)
+    illustrate_list_statistics()
+    illustrate_list_correlation_and_prediction()
+    illustrate_list_built_in_functions()
+    illustrate_list_methods()
+    illustrate_list_transformations()
+    illustrate_list_comprehensions()
+
+    logger.info("Add more logging statements to the code to see what happens.")
+    logger.info("Explore enough to understand.")
+    logger.info("Apply these skills to your own topic domain.")
+
+    show_log()
 
 
+# Why do we wrap parts of our code into functions?
+# Because when you write good functions, you can reuse them in other scripts.
+# Just like we import our logger and reuse the setup_logger() function.
+# You can easily build a set of resuable functions to support your topic domain.
 
+# For example, if your topic domain:
+# Is sports, create functions to provide a list of teams.
+# Is pets, create functions to calculate adoption prices.
+# Is music, create functions to return a lists of favorite artists.
 
+# When you write reusable functions for your domain, you can
+# import the module with your utility functions into other scripts
+# and use them for free.
+# This is excellent practice.
